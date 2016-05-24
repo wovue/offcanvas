@@ -1,0 +1,21 @@
+{
+  "name": "wovue-offcanvas",
+  "version": "0.0.1",
+  "description": "wovue offcanvas components",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wovue/offcanvas.git"
+  },
+  "keywords": [
+    "wovue",
+    "vue",
+    "component"
+  ],
+  "author": "Gean Carlos <gean.marroquin@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wovue/offcanvas/issues"
+  },
+  "homepage": "https://github.com/wovue/offcanvas#readme"
+}
