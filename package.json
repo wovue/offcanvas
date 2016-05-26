@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/wovue/offcanvas/issues"
   },
-  "homepage": "https://github.com/wovue/offcanvas#readme"
+  "homepage": "https://github.com/wovue/offcanvas#readme",
+  "dependencies": {
+    "events": "^1.1.0",
+    "sass-bem-constructor": "^1.0.0"
+  }
 }
