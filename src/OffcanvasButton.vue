@@ -1,11 +1,24 @@
 <template>
-
+  <button @click="toggleOffcanvas" type="button">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
-  export default {}
+  import eventBus from './eventBus'
+
+  export default {
+    props: [
+      {
+        name: 'offcanvasRef',
+        type: String,
+        require: true
+      }
+    ],
+    methods: {
+      toggleOffcanvas () {
+        eventBus.emit('toggle:offcanvas', this.offcanvasRef)
+      }
+    }
+  }
 </script>
-
-<style>
-
-</style>
