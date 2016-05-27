@@ -13,26 +13,26 @@ $ npm install --save wovue-offcanvas
 ## Usage
 
 ```js
-import { Offcanvas, OffcanvasButton, OffcanvasWrapper } from 'wovue-offcanvas'
+import { WvOffcanvas, WvOffcanvasButton, WvOffcanvasWrapper } from 'wovue-offcanvas'
 
 new Vue({
   components: {
-    Offcanvas,
-    OffcanvasButton,
-    OffcanvasWrapper
+    WvOffcanvas,
+    WvOffcanvasButton,
+    WvOffcanvasWrapper
   }
 })
 ```
 
 ```html
-<offcanvas ref="menu" wrapper-ref="main" align="right" :width="300">
-  <offcanvas-button ref="menu" >Toggle menu offcanvas</offcanvas-button>
+<wv-offcanvas ref="menu" wrapper-ref="main" align="right" :width="300">
+  <wv-offcanvas-button ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
   <!-- here offcanvas content -->
-</offcanvas>
-<offcanvas-wrapper ref="main">
-  <offcanvas-button ref="menu" >Toggle menu offcanvas</offcanvas-button>
+</wv-offcanvas>
+<wv-offcanvas-wrapper ref="main">
+  <wv-offcanvas-button ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
   <!-- here your content -->
-</offcanvas-wrapper>
+</wv-offcanvas-wrapper>
 ```
 
 ### Props

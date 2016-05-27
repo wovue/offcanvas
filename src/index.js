@@ -3,7 +3,7 @@ var OffcanvasButton = require('./components/OffcanvasButton')
 var OffcanvasWrapper = require('./components/OffcanvasWrapper')
 
 module.exports = {
-  WovueOffcanvas: Offcanvas,
-  WovueOffcanvasButton: OffcanvasButton,
-  WovueOffcanvasWrapper: OffcanvasWrapper
+  WvOffcanvas: Offcanvas,
+  WvOffcanvasButton: OffcanvasButton,
+  WvOffcanvasWrapper: OffcanvasWrapper
 }
