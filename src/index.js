@@ -1,7 +1,9 @@
-import Offcanvas from './components/Offcanvas'
-import OffcanvasButton from './components/OffcanvasButton'
-import OffcanvasWrapper from './components/OffcanvasWrapper'
+var Offcanvas = require('./components/Offcanvas')
+var OffcanvasButton = require('./components/OffcanvasButton')
+var OffcanvasWrapper = require('./components/OffcanvasWrapper')
 
-export { Offcanvas as WovueOffcanvas }
-export { OffcanvasButton as WovueOffcanvasButton }
-export { OffcanvasWrapper as WovueOffcanvasWrapper }
+module.exports = {
+  WovueOffcanvas: Offcanvas,
+  WovueOffcanvasButton: OffcanvasButton,
+  WovueOffcanvasWrapper: OffcanvasWrapper
+}
