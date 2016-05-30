@@ -1,6 +1,6 @@
 # Offcanvas
 
-The `wovue-offcanvas` module contains the offcanvas component.
+The `wovue-offcanvas` module contains the offcanvas component. You can add multiples offcanvas and  offcanvas-wrapper.
 
 Install using npm:
 
@@ -26,18 +26,18 @@ new Vue({
 
 ```html
 <wv-offcanvas ref="menu" wrapper-ref="main" align="right" :width="300">
-  <wv-offcanvas-button ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
+  <wv-offcanvas-button offcanvas-ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
   <!-- here offcanvas content -->
 </wv-offcanvas>
 <wv-offcanvas-wrapper ref="main">
-  <wv-offcanvas-button ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
+  <wv-offcanvas-button offcanvas-ref="menu" >Toggle menu offcanvas</wv-offcanvas-button>
   <!-- here your content -->
 </wv-offcanvas-wrapper>
 ```
 
 ### Props
 
-### offcanvas-wrapper
+#### offcanvas-wrapper
 
 | Name | Type | Default | Description |
 |------|:----:|:--------|:------------|
