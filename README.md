@@ -42,17 +42,17 @@ new Vue({
 | Name | Type | Default | Description |
 |------|:----:|:--------|:------------|
 | ref | String | (required) | A unique identifier for the offcanvas-wrapper. |
-| showOverlay | Boolean | true | Show the overlay or no. Click over the overlay will close the current offcanvas. |
-| push | Boolean | true | Push content if it is true. |
-| modifier | String, Boolean | false | Modifier class name for custom style rules. |
+| showOverlay | Boolean | `true` | Show the overlay or no. Click over the overlay will close the current offcanvas. |
+| push | Boolean | `true` | Push content if it is true. |
+| modifier | String, Boolean | `false` | Modifier class name for custom style rules. |
 
 #### offcanvas
 
 | Name | Type | Default | Description |
 |------|:----:|:--------|:------------|
 | ref | String | (required) | A unique identifier for the offcanvas. |
-| wrapperRef | String | (required) | offcanvas-wrapper reference. |
-| align | String | `"left"` | Offcanvas position. The support align values are `left` and `right`. |
+| wrapperRef | String | (required) | Offcanvas wrapper reference. |
+| align | String | `'left'` | Offcanvas position. The support align values are `left` and `right`. |
 | width | Number | `300` | Offcanvas width. |
 | modifier | String, Boolean | `false` | Modifier class name for custom style rules. |
 
@@ -60,4 +60,4 @@ new Vue({
 
 | Name | Type | Default | Description |
 |------|:----:|:--------|:------------|
-| offcanvasRef | String | (required) | offcanvas reference. |
+| offcanvasRef | String | (required) | Offcanvas reference. |
