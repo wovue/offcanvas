@@ -1,9 +1,15 @@
 <template>
-  <div class="c-offcanvas"
-    :class="[ modifierClass, offcanvasModifier, { 'is-open' : isOpen } ]"
-    :style="{ maxWidth: offcanvasMaxWidth }">
-    <div>
-      <slot></slot>
+  <div>
+    <div
+      class="c-offcanvas"
+      v-if="isOpen"
+      :transition="offcanvasTransition"
+      :class="[ modifierClass ]"
+      :style="{ maxWidth: offcanvasMaxWidth }"
+    >
+      <div>
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +47,9 @@
       }
     },
     computed: {
+      offcanvasTransition () {
+        return `offcanvas-${this.align}`
+      },
       modifierClass () {
         if (this.modifier) {
           return `c-offcanvas--${this.modifier}`
@@ -49,57 +58,59 @@
       },
       offcanvasMaxWidth () {
         return `${this.width}px`
-      },
-      offcanvasTransition () {
-        return `offcanvas-slide-${this.align}`
-      },
-      offcanvasModifier () {
-        return `c-offcanvas--${this.align}`
       }
     },
     ready () {
-      eventBus.on('toggle:offcanvas', (offcanvasRef) => {
-        if (this.ref === offcanvasRef) {
-          this.toggle()
-        }
-      })
-
-      eventBus.on('close:offcanvas', (offcanvasRef) => {
-        if (this.ref === offcanvasRef) {
-          this.close()
-        }
-      })
-
-      eventBus.on('open:offcanvas', (offcanvasRef) => {
-        if (this.ref === offcanvasRef) {
-          this.open()
-        }
-      })
+      eventBus.on('toggle:offcanvas', this.onToggle)
+      eventBus.on('close:offcanvas', this.onClose)
+      eventBus.on('open:offcanvas', this.onOpen)
+    },
+    beforeDestroy () {
+      eventBus.removeListener('toggle:offcanvas', this.onToggle)
+      eventBus.removeListener('close:offcanvas', this.onClose)
+      eventBus.removeListener('open:offcanvas', this.onOpen)
     },
     methods: {
-      toggle () {
-        if (this.isOpen) {
-          eventBus.emit('close:offcanvasWrapper', this.wrapperRef)
-        } else {
-          eventBus.emit('open:offcanvasWrapper', {
-            offcanvasWidth: this.width,
-            offcanvasAlign: this.align,
-            offcanvasRef: this.ref
-          }, this.wrapperRef)
+      onToggle (offcanvasRef) {
+        if (this.ref === offcanvasRef) {
+          // toggle offcanvas
+          if (this.isOpen) {
+            eventBus.emit('close:offcanvasWrapper', this.wrapperRef)
+          } else {
+            eventBus.emit('open:offcanvasWrapper', {
+              offcanvasWidth: this.width,
+              offcanvasAlign: this.align,
+              offcanvasRef: this.ref
+            }, this.wrapperRef)
+          }
         }
       },
-      open () {
-        this.isOpen = true
+      onClose (offcanvasRef) {
+        if (this.ref === offcanvasRef) {
+          // close offcanvas
+          this.isOpen = false
+        }
       },
-      close () {
-        this.isOpen = false
+      onOpen (offcanvasRef) {
+        if (this.ref === offcanvasRef) {
+          // open offcanvas
+          this.isOpen = true
+        }
       }
     }
   }
 </script>
 
 <style lang="scss">
-  @import '~sass-bem-constructor/dist/bem-constructor';
+  @import '~wocss-tools-bem-constructor';
+
+
+
+
+
+  /*------------------------------------*\
+    #Component
+  \*------------------------------------*/
 
   @include component('offcanvas') {
     -webkit-overflow-scrolling: touch;
@@ -110,26 +121,44 @@
     top: 0;
     transition: transform 0.5s;
     width: 100%;
-    z-index: 2;
-
-    @include modifier('left') {
-      left: 0;
-      right: auto;
-      transform: translate3d(-100%, 0, 0);
-    }
-
-    @include modifier('right') {
-      left: auto;
-      right: 0;
-      transform: translate3d(100%, 0, 0);
-    }
-
-    @include state('open') {
-      transform: translate3d(0, 0, 0);
-    }
+    z-index: 3;
 
     @include modifier('default') {
       background: #ffffff;
+    }
+  }
+
+
+
+
+
+  /*------------------------------------*\
+    #Vue CSS transitions
+  \*------------------------------------*/
+
+  .offcanvas-left {
+    &-transition {
+      left: 0;
+      right: auto;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &-enter,
+    &-leave {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  .offcanvas-right {
+    &-transition {
+      left: auto;
+      right: 0;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &-enter,
+    &-leave {
+      transform: translate3d(100%, 0, 0);
     }
   }
 </style>

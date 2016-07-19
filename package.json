@@ -20,6 +20,6 @@
   "homepage": "https://github.com/wovue/offcanvas#readme",
   "dependencies": {
     "events": "^1.1.0",
-    "sass-bem-constructor": "^1.0.0"
+    "wocss-tools-bem-constructor": "^1.0.1"
   }
 }

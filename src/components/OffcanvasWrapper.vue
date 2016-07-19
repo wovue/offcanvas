@@ -1,12 +1,18 @@
 <template>
-  <div class="c-offcanvas-wrapper"
-  :class="[ modifierClass, { 'is-open' : isOpen } ]">
-    <div class="c-offcanvas-wrapper__overlay"
-    @click.stop="close"
-    v-if="showOverlay"></div>
+  <div
+    class="c-offcanvas-wrapper"
+    :class="[ modifierClass, { 'is-open' : isOpen } ]"
+  >
+    <div
+      class="c-offcanvas-wrapper__overlay"
+      @click.stop="close"
+      v-if="showOverlay"
+    ></div>
     <slot name="offcanvas"></slot>
-    <div class="c-offcanvas-wrapper__content"
-    :style="{ transform: contentTransform }">
+    <div
+      class="c-offcanvas-wrapper__content"
+      :style="{ transform: contentTransform }"
+    >
       <slot></slot>
     </div>
   </div>
@@ -61,17 +67,12 @@
       }
     },
     ready () {
-      eventBus.on('open:offcanvasWrapper', (offcanvasProps, wrapperRef) => {
-        if (this.ref === wrapperRef) {
-          this.open(offcanvasProps)
-        }
-      })
-
-      eventBus.on('close:offcanvasWrapper', (wrapperRef) => {
-        if (this.ref === wrapperRef) {
-          this.close()
-        }
-      })
+      eventBus.on('open:offcanvasWrapper', this.onOpen)
+      eventBus.on('close:offcanvasWrapper', this.onClose)
+    },
+    beforeDestroy () {
+      eventBus.removeListener('open:offcanvasWrapper', this.onOpen)
+      eventBus.removeListener('close:offcanvasWrapper', this.onClose)
     },
     methods: {
       close () {
@@ -87,26 +88,40 @@
         this.isOpen = true
 
         eventBus.emit('open:offcanvas', this.offcanvasRef)
+      },
+      onOpen (offcanvasProps, wrapperRef) {
+        if (this.ref === wrapperRef) {
+          this.open(offcanvasProps)
+        }
+      },
+      onClose (wrapperRef) {
+        if (this.ref === wrapperRef) {
+          this.close()
+        }
       }
     }
   }
 </script>
 
 <style lang="scss">
-  @import '~sass-bem-constructor/dist/bem-constructor';
+  @import '~wocss-tools-bem-constructor';
+
+
+
+
+
+  /*------------------------------------*\
+    #Component
+  \*------------------------------------*/
 
   @include component('offcanvas-wrapper') {
-    overflow: hidden;
-
     @include element('overlay') {
       bottom: 0;
       left: 0;
-      opacity: 0;
       position: fixed;
       right: 0;
       top: 0;
-      transform: translate3d(-100%, 0, 0);
-      transition: opacity .3s, transform 0s .3s;
+      transition: opacity .3s;
       z-index: 1;
     }
 
@@ -114,18 +129,33 @@
       transition: transform 0.5s;
     }
 
-    @include state('open') {
-      @include modifies-element('overlay') {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-        transition: opacity .3s;
-      }
-    }
-
     @include modifier('default') {
       @include modifies-element('overlay') {
         background-color: rgba(#000000, 0.5);
       }
+    }
+
+    @include state('open') {
+      overflow: hidden;
+    }
+  }
+
+
+
+
+
+  /*------------------------------------*\
+    #Vue CSS transitions
+  \*------------------------------------*/
+
+  .offcanvas-left {
+    &-transition {
+      opacity: 1;
+    }
+
+    &-enter,
+    &-leave {
+      opacity: 0;
     }
   }
 </style>

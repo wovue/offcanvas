@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggleOffcanvas" type="button">
+  <button @click.stop="toggleOffcanvas" type="button">
     <slot></slot>
   </button>
 </template>
