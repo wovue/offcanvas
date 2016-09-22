@@ -1,7 +1,7 @@
 {
   "name": "wovue-offcanvas",
   "version": "0.0.3",
-  "description": "wovue offcanvas components",
+  "description": "[Deprecated] wovue offcanvas components",
   "main": "./src/index.js",
   "repository": {
     "type": "git",

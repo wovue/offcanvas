@@ -1,5 +1,7 @@
 # Offcanvas
 
+> Deprecated, use [wovue-off-canvas](https://www.npmjs.com/package/wovue-off-canvas) instead.
+
 The `wovue-offcanvas` module contains the offcanvas component. You can add multiples offcanvas and  offcanvas-wrapper.
 
 Install using npm:
